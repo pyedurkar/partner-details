@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Development Partner Profile</title>
+<meta name="description" content="A 5-minute profile for software development companies.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: one 760px column. Sticky header with title + progress. Intro card, stacked section cards of tap chips,
+   sticky submit bar. After submit the form is replaced by a confirmation card. */
+:root{
+  --bg:#F3F5F8; --surface:#FFFFFF; --ink:#16213A; --muted:#5D6779;
+  --line:#DCE1EA; --line-strong:#B5BECD;
+  --accent:#D98A14; --accent-soft:#FBEFD9; --accent-ink:#7A4B00;
+  --chip-on:#16213A; --chip-on-fg:#FFFFFF;
+  --good:#1D7A4C; --good-soft:#E3F3EA; --bad:#B23A33; --bad-soft:#FBE9E7;
+  --font-display:"Bricolage Grotesque","Avenir Next","Segoe UI",system-ui,sans-serif;
+  --font-body:"IBM Plex Sans","Segoe UI",Roboto,system-ui,sans-serif;
+  --font-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+  color-scheme:light;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#0E1320; --surface:#161C2C; --ink:#E9EDF5; --muted:#9AA4B9;
+    --line:#273047; --line-strong:#3B4660;
+    --accent:#F0B24A; --accent-soft:#2E2514; --accent-ink:#F6CF86;
+    --chip-on:#E9EDF5; --chip-on-fg:#0E1320;
+    --good:#4CC38A; --good-soft:#132A20; --bad:#F08078; --bad-soft:#2E1716;
+    color-scheme:dark;
+  }
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--bg);color:var(--ink);font:400 15px/1.5 var(--font-body);margin:0;padding-top:env(safe-area-inset-top,0px)}
+[hidden]{display:none!important}
+.wrap{max-width:760px;margin:0 auto;padding-inline:16px}
+button,input,textarea{font-family:inherit}
+em{font-style:normal;color:var(--bad)}
+
+/* header */
+.top{position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top,0px)}
+.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:8px 16px;padding-block:10px;flex-wrap:wrap}
+.top h1{font:700 20px/1.15 var(--font-display);margin:0;letter-spacing:-.01em}
+.progress{display:flex;align-items:center;gap:10px;font-size:12px;color:var(--muted);flex:0 1 240px;min-width:160px}
+.progress span{font-family:var(--font-mono);font-variant-numeric:tabular-nums;white-space:nowrap}
+.bar{flex:1;height:6px;background:var(--line);border-radius:3px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .25s}
+
+/* intro */
+.intro{margin-block:18px 14px;padding:16px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+.intro p{margin:0 0 8px;max-width:62ch}
+.intro p:last-child{margin:0}
+.intro .meta{display:flex;flex-wrap:wrap;gap:6px 14px;font:500 12px var(--font-mono);color:var(--muted)}
+.lock{display:flex;gap:8px;align-items:flex-start;font-size:13px;color:var(--good);background:var(--good-soft);border-radius:10px;padding:9px 11px;margin-top:10px}
+.lock svg{flex:none;margin-top:2px}
+.jump{display:flex;gap:6px;overflow-x:auto;padding-block:0 14px;scrollbar-width:none}
+.jump::-webkit-scrollbar{display:none}
+.jump button{flex:none;font:500 11px/1 var(--font-body);letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding:7px 10px;border:1px solid var(--line);border-radius:999px;background:var(--surface);cursor:pointer}
+.jump button:hover{border-color:var(--line-strong);color:var(--ink)}
+
+/* sections */
+.sec{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px 16px 6px;margin-bottom:14px;scroll-margin-top:90px}
+.sec > header{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:4px}
+.sec h2{font:700 18px/1.2 var(--font-display);margin:0}
+.sec .count{font:500 12px var(--font-mono);color:var(--muted);font-variant-numeric:tabular-nums}
+.q{padding-block:14px;border-top:1px solid var(--line);scroll-margin-top:100px}
+.sec > header + .q{border-top:0}
+.l{display:block;font-weight:600;font-size:14px;line-height:1.35;margin-bottom:9px}
+.hint{font-weight:400;color:var(--muted);font-size:13px}
+.eg{font-size:13px;line-height:1.45;color:var(--muted);background:var(--bg);border-left:3px solid var(--accent);padding:7px 10px;border-radius:0 8px 8px 0;margin:-2px 0 10px}
+.eg b{color:var(--accent-ink);font-weight:600}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid2 .l{margin-bottom:6px}
+@media (max-width:540px){.grid2{grid-template-columns:1fr}}
+.f{min-width:0}
+.in{width:100%;padding:10px 12px;border:1px solid var(--line-strong);border-radius:10px;background:var(--bg);color:var(--ink);font:400 15px/1.4 var(--font-body)}
+.in::placeholder{color:var(--muted);opacity:.8}
+textarea.in{min-height:96px;resize:vertical}
+.in.other{margin-top:10px;max-width:360px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{appearance:none;display:inline-flex;flex-direction:column;align-items:flex-start;gap:2px;min-height:38px;padding:8px 13px;border:1px solid var(--line-strong);border-radius:999px;background:var(--surface);color:var(--ink);font:500 14px/1.15 var(--font-body);cursor:pointer;text-align:left;transition:background .12s,border-color .12s}
+.chip.two{border-radius:12px;padding-block:6px}
+.chip small{font:400 11px/1.1 var(--font-mono);color:var(--muted)}
+.chip:hover{border-color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--chip-on);color:var(--chip-on-fg);border-color:var(--chip-on)}
+.chip[aria-pressed="true"] small{color:inherit;opacity:.72}
+.err{display:none;color:var(--bad);font-size:13px;margin-top:6px}
+.invalid .err{display:block}
+.invalid .in{border-color:var(--bad)}
+.hp{position:absolute!important;left:-10000px!important;width:1px;height:1px;overflow:hidden}
+:is(button,input,textarea,[tabindex]):focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+
+/* buttons, bars */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 18px;border-radius:10px;border:1px solid var(--line-strong);background:var(--surface);color:var(--ink);font:600 15px/1 var(--font-body);cursor:pointer;white-space:nowrap}
+.btn:hover{border-color:var(--ink)}
+.btn.primary{background:var(--chip-on);color:var(--chip-on-fg);border-color:var(--chip-on)}
+.btn:disabled{opacity:.55;cursor:default}
+.actions{position:sticky;bottom:0;z-index:10;display:flex;gap:10px;align-items:center;flex-wrap:wrap;padding-block:10px calc(12px + env(safe-area-inset-bottom,0px));background:var(--bg);border-top:1px solid var(--line)}
+.actions .primary{flex:1 1 200px}
+.actions .msg{flex:1 1 100%;font-size:13px;color:var(--bad);margin:0}
+.spin{width:16px;height:16px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+/* done */
+.done{margin-block:28px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:22px 18px}
+.done h2{font:700 26px/1.15 var(--font-display);margin:0 0 6px;text-wrap:balance}
+.done p{margin:0 0 12px;color:var(--muted);max-width:60ch}
+.refid{display:inline-block;font:500 15px var(--font-mono);padding:6px 10px;border-radius:8px;background:var(--accent-soft);color:var(--accent-ink);margin-bottom:14px}
+.done pre{white-space:pre-wrap;overflow-wrap:anywhere;font:13px/1.55 var(--font-mono);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px;margin:0 0 14px;max-height:340px;overflow:auto}
+.toast{position:fixed;left:50%;bottom:calc(90px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 14px;border-radius:10px;font:500 13px var(--font-body);opacity:0;pointer-events:none;transition:opacity .2s;z-index:60;max-width:calc(100vw - 32px);text-align:center}
+.toast.show{opacity:1}
+@media (max-width:480px){.top h1{font-size:18px}.progress{flex-basis:100%}}
+@media (prefers-reduced-motion: reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <div>
+      <h1>Development Partner Profile</h1>
+    </div>
+    <div class="progress" aria-live="polite"><span id="progressText">0 answered</span><div class="bar"><i id="progressBar"></i></div></div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div id="formView">
+    <section class="intro">
+      <p>We connect businesses with software development teams across India. Tell us about your company once, and we'll match you with client projects that fit your team, rates and stack.</p>
+      <div class="meta"><span>About 5 minutes</span><span>Most questions are one tap</span><span>Only fields marked <em>*</em> are required</span></div>
+      <div class="lock">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+        <span>Your answers are private. They are never shown to other companies, and this page cannot display anyone's responses.</span>
+      </div>
+    </section>
+
+    <nav class="jump" id="jump" aria-label="Jump to section"></nav>
+    <form id="form" autocomplete="on" novalidate></form>
+
+    <div class="actions">
+      <button class="btn primary" id="submitBtn" type="button">Submit profile</button>
+      <p class="msg" id="formMsg" role="alert" hidden></p>
+    </div>
+  </div>
+
+  <section class="done" id="doneView" hidden aria-live="polite">
+    <h2 id="doneTitle">Thank you. Your profile is in.</h2>
+    <p id="doneText">We'll reach out when a client project matches your team.</p>
+    <div class="refid" id="doneRef" hidden></div>
+    <p>A copy of what you sent, for your records:</p>
+    <pre id="doneSummary"></pre>
+    <button class="btn" id="copyBtn" type="button">Copy my answers</button>
+  </section>
+
+</main>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+(function(){
+'use strict';
+
+/* ═════════ SETTINGS — paste your Apps Script URL before publishing ═════════ */
+const SCRIPT_URL = 'AKfycbxFXsgNp-KVp_pLbmI9Bgl63cGBB7mcUv2f5ktuMQyY8QDzV_EpCeUbkBeXEqnHEkdk'; // ends with /exec
+/* ═════════════════════════════════════════════════════════════════════ */
+
+const SECTIONS=[
+  {id:'basics',title:'Your company'},
+  {id:'pricing',title:'Pricing'},
+  {id:'stack',title:'Tech stack'},
+  {id:'services',title:'Services & clients'},
+  {id:'delivery',title:'Delivery & credentials'},
+  {id:'partnership',title:'Referral partnership'},
+  {id:'final',title:'Anything else'},
+];
+/* col = column header in the Google Sheet. Add, remove or reword questions freely:
+   new columns are created automatically on the next submission. */
+const Q=[
+  {id:'name',s:'basics',t:'text',label:'Company name',col:'Company',required:true,ac:'organization',ph:'e.g. Acme Softwares Pvt Ltd'},
+  {id:'contact',s:'basics',t:'text',label:'Your name & designation',col:'Contact person',required:true,ac:'name',ph:'e.g. Rahul Mehta, Founder'},
+  {id:'phone',s:'basics',t:'text',kind:'tel',label:'Phone / WhatsApp',col:'Phone',required:true,ac:'tel',ph:'+91 98XXX XXXXX'},
+  {id:'email',s:'basics',t:'text',kind:'email',label:'Email',col:'Email',required:true,ac:'email',ph:'you@company.com'},
+  {id:'website',s:'basics',t:'text',kind:'url',label:'Website',col:'Website',ac:'url',ph:'acmesoft.in'},
+  {id:'linkedin',s:'basics',t:'text',label:'LinkedIn or Clutch page',col:'LinkedIn / Clutch',ph:'Link (optional)'},
+  {id:'city',s:'basics',t:'single',label:'City',col:'City',other:true,opts:['Pune','Mumbai','Bengaluru','Hyderabad','Chennai','Delhi NCR','Ahmedabad','Kolkata','Indore','Jaipur','Kochi','Chandigarh / Mohali','Nagpur','Nashik']},
+  {id:'years',s:'basics',t:'single',label:'Years in business',col:'Years in business',opts:['Under 2','2–5','5–10','10+']},
+  {id:'team',s:'basics',t:'single',label:'Team size',hint:'developers, designers, QA and PMs',col:'Team size',opts:['1–10','11–25','26–50','51–100','101–250','250+']},
+  {id:'ctype',s:'basics',t:'single',label:'Which best describes you?',col:'Company type',opts:['Freelancer / solo','Boutique agency','Mid-size services firm','Product + services','Large IT services']},
+  {id:'entity',s:'basics',t:'single',label:'Registered as',col:'Registered as',opts:['Pvt Ltd','LLP','Partnership','Proprietorship','Not registered']},
+
+  {id:'rate_jr',s:'pricing',t:'single',label:'Hourly rate — junior developer',hint:'1–2 yrs experience',col:'Rate junior (1–2 yrs)',opts:[
+    {v:'Under ₹500',sub:'< $6/hr'},{v:'₹500–800',sub:'$6–10/hr'},{v:'₹800–1,200',sub:'$10–14/hr'},{v:'₹1,200–1,800',sub:'$14–21/hr'},{v:'₹1,800+',sub:'$21+/hr'}]},
+  {id:'rate_mid',s:'pricing',t:'single',label:'Hourly rate — mid-level developer',hint:'2–5 yrs experience',col:'Rate mid (2–5 yrs)',opts:[
+    {v:'Under ₹800',sub:'< $10/hr'},{v:'₹800–1,500',sub:'$10–18/hr'},{v:'₹1,500–2,500',sub:'$18–30/hr'},{v:'₹2,500–4,000',sub:'$30–48/hr'},{v:'₹4,000+',sub:'$48+/hr'}]},
+  {id:'rate_sr',s:'pricing',t:'single',label:'Hourly rate — senior developer',hint:'5–10 yrs experience',col:'Rate senior (5–10 yrs)',opts:[
+    {v:'Under ₹1,500',sub:'< $18/hr'},{v:'₹1,500–2,500',sub:'$18–30/hr'},{v:'₹2,500–4,000',sub:'$30–48/hr'},{v:'₹4,000–6,000',sub:'$48–72/hr'},{v:'₹6,000+',sub:'$72+/hr'}]},
+  {id:'rate_lead',s:'pricing',t:'single',label:'Hourly rate — lead / architect',hint:'10+ yrs experience',col:'Rate lead (10+ yrs)',opts:[
+    {v:'Under ₹2,500',sub:'< $30/hr'},{v:'₹2,500–4,000',sub:'$30–48/hr'},{v:'₹4,000–6,000',sub:'$48–72/hr'},{v:'₹6,000–9,000',sub:'$72–108/hr'},{v:'₹9,000+',sub:'$108+/hr'}]},
+  {id:'devmonth',s:'pricing',t:'single',label:'Dedicated developer, per month',hint:'mid-level, full-time, ~160 hrs',col:'Dedicated dev / month',opts:['Under ₹80k','₹80k–1.5L','₹1.5–2.5L','₹2.5–4L','₹4L+']},
+  {id:'website_cost',s:'pricing',t:'single',label:'What would you charge for a simple website?',col:'Quote: simple website',
+    eg:'A 6-page site for a CA firm or clinic: Home, About, Services, Team, Blog, Contact. WordPress or Next.js, mobile-friendly, contact form that emails the owner, basic SEO, hosted on their domain.',
+    opts:['Under ₹25k','₹25–50k','₹50k–1L','₹1–2.5L','₹2.5L+']},
+  {id:'webapp_cost',s:'pricing',t:'single',label:'What would you charge for a custom web app MVP?',col:'Quote: web app MVP',
+    eg:'An appointment system for a 5-doctor clinic: patient sign-up & login, doctor schedules, slot booking, SMS/WhatsApp reminders, Razorpay payments, admin dashboard with reports. Web only.',
+    opts:['Under ₹3L','₹3–8L','₹8–15L','₹15–30L','₹30L+']},
+  {id:'app_cost',s:'pricing',t:'single',label:'What would you charge for a basic mobile app?',col:'Quote: mobile app',
+    eg:'A gym or housing-society app on Android + iOS: OTP login, membership plans, UPI/Razorpay payments, notices & push notifications, simple admin panel, published on Play Store and App Store.',
+    opts:['Under ₹2L','₹2–5L','₹5–10L','₹10–20L','₹20L+']},
+  {id:'models',s:'pricing',t:'multi',label:'Engagement models you offer',col:'Engagement models',opts:['Fixed price','Time & material','Dedicated team / retainer','Hourly']},
+  {id:'minproj',s:'pricing',t:'single',label:'Minimum project size',col:'Minimum project',opts:['No minimum','₹50k+','₹1L+','₹5L+','₹10L+','₹25L+']},
+  {id:'advance',s:'pricing',t:'single',label:'Advance payment you usually ask for',col:'Advance',opts:['None','20–30%','40–50%','Milestone-based','Monthly billing']},
+  {id:'amc',s:'pricing',t:'single',label:'Post-launch support',col:'Post-launch support',opts:['Free 1–3 months','Free 6+ months','Paid AMC only','None']},
+
+  {id:'fe',s:'stack',t:'multi',label:'Frontend & CMS',col:'Frontend & CMS',opts:['React','Next.js','Angular','Vue / Nuxt','Plain HTML/CSS/JS','WordPress','Shopify','Webflow / Wix']},
+  {id:'be',s:'stack',t:'multi',label:'Backend',col:'Backend',opts:['Node.js','Python (Django / FastAPI)','PHP (Laravel / CodeIgniter)','Java (Spring)','.NET','Ruby on Rails','Go']},
+  {id:'mobile',s:'stack',t:'multi',label:'Mobile',col:'Mobile',opts:['React Native','Flutter','Native iOS (Swift)','Native Android (Kotlin)','Ionic / Capacitor',{v:'None',x:true}]},
+  {id:'dbs',s:'stack',t:'multi',label:'Databases',col:'Databases',opts:['PostgreSQL','MySQL','MongoDB','Firebase / Supabase','Redis','SQL Server']},
+  {id:'cloud',s:'stack',t:'multi',label:'Cloud & DevOps',col:'Cloud & DevOps',opts:['AWS','Azure','Google Cloud','DigitalOcean / Hostinger','Vercel / Netlify','Docker / Kubernetes','CI/CD pipelines']},
+  {id:'ai',s:'stack',t:'multi',label:'AI / ML',col:'AI / ML',opts:['LLM apps & chatbots','RAG / document AI','Computer vision','Predictive ML / data science','Voice / speech',{v:'None',x:true}]},
+
+  {id:'services',s:'services',t:'multi',label:'Services you offer',col:'Services',opts:['Website design & dev','Custom web apps','Mobile apps','E-commerce','UI/UX design','AI/ML solutions','ERP / CRM / custom software','Maintenance & support','QA & testing','Staff augmentation','Cloud / DevOps','Digital marketing & SEO']},
+  {id:'industries',s:'services',t:'multi',label:'Industries you have delivered for',col:'Industries',opts:['Healthcare','Fintech / BFSI','E-commerce & retail','Education / EdTech','Real estate','Logistics','Manufacturing','Hospitality & travel','Government / PSU','Media & entertainment','Startups (general)']},
+  {id:'geos',s:'services',t:'multi',label:'Where your clients are',col:'Client geography',opts:['India','US & Canada','UK & Europe','Middle East','Australia / NZ','Southeast Asia','Africa']},
+  {id:'notable',s:'services',t:'textarea',label:'Notable clients or projects',col:'Notable clients / projects',ph:'Client names, what you built, live links'},
+  {id:'portfolio',s:'services',t:'text',label:'Portfolio or case study link',col:'Portfolio link',ph:'Drive, Behance or website link',wide:true},
+
+  {id:'refs',s:'delivery',t:'single',label:'Can you share client references?',col:'Client references',opts:['Yes, readily','On request','No']},
+  {id:'pm',s:'delivery',t:'single',label:'Who manages projects day to day?',col:'Project management',opts:['Dedicated PM','Founder-led','Developer-direct']},
+  {id:'turnaround',s:'delivery',t:'single',label:'Typical delivery time for the simple website above',col:'Website turnaround',opts:['Under 2 weeks','2–4 weeks','1–2 months','2+ months']},
+  {id:'hours',s:'delivery',t:'single',label:'Working hours',col:'Working hours',opts:['IST only','Overlap with UK/EU','Overlap with US','Flexible / 24×7']},
+  {id:'nda',s:'delivery',t:'single',label:'Will you sign an NDA with end clients?',col:'NDA',opts:['Yes','Case by case','No']},
+  {id:'certs',s:'delivery',t:'multi',label:'Certifications',col:'Certifications',opts:['ISO 9001','ISO 27001','CMMI','SOC 2','AWS / Azure / GCP partner',{v:'None',x:true}]},
+
+  {id:'openref',s:'partnership',t:'single',label:'Are you open to paying a referral commission?',col:'Open to commission',opts:['Yes','Open to discuss','No']},
+  {id:'commission',s:'partnership',t:'single',label:'Commission you can offer',col:'Commission',opts:['Under 5%','5–10%','10–15%','15–20%','20%+','Flat fee per deal']},
+  {id:'commbasis',s:'partnership',t:'multi',label:'Commission paid on',col:'Commission basis',opts:['First invoice','Total project value','Recurring retainer / AMC','One-time flat fee']},
+  {id:'agreement',s:'partnership',t:'single',label:'Will you sign a referral agreement?',col:'Referral agreement',opts:['Yes','Prefer verbal','Need to discuss']},
+  {id:'whitelabel',s:'partnership',t:'single',label:'Can a partner present your team under their brand?',hint:'white-label',col:'White-label',opts:['Yes','Case by case','No']},
+
+  {id:'notes',s:'final',t:'textarea',label:'Anything else we should know?',col:'Their notes',ph:'Strengths, specialities, team bandwidth, preferred project types…'},
+];
+const BY={}; Q.forEach(q=>BY[q.id]=q);
+const norm=o=>typeof o==='string'?{v:o}:o;
+const DRAFT_KEY='dpp.draft.v1';
+let STARTED=Date.now();
+const REF=(new URLSearchParams(location.search).get('ref')||'').slice(0,60).replace(/[^\w.\-@ ]/g,'');
+const CONNECTED=/^https:\/\/script\.google(usercontent)?\.com\//.test(SCRIPT_URL);
+
+let answers={};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* ───────── render ───────── */
+function render(){
+  $('form').innerHTML=SECTIONS.map(sec=>{
+    const qs=Q.filter(q=>q.s===sec.id); let html='', i=0;
+    while(i<qs.length){
+      if(qs[i].t==='text'&&!qs[i].wide){ const g=[]; while(i<qs.length&&qs[i].t==='text'&&!qs[i].wide){g.push(qs[i]);i++;} html+=`<div class="q"><div class="grid2">${g.map(textField).join('')}</div></div>`; }
+      else { html+=block(qs[i]); i++; }
+    }
+    return `<section class="sec" id="sec-${sec.id}"><header><h2>${esc(sec.title)}</h2><span class="count" data-sec="${sec.id}"></span></header>${html}</section>`;
+  }).join('')+
+  `<div class="hp" aria-hidden="true"><label for="hp_fax">Leave this empty</label><input id="hp_fax" name="hp_fax" type="text" tabindex="-1" autocomplete="off"></div>`;
+  $('jump').innerHTML=SECTIONS.map(s=>`<button type="button" data-jump="${s.id}">${esc(s.title)}</button>`).join('');
+}
+function textField(q){
+  const type=q.kind==='email'?'email':q.kind==='tel'?'tel':q.kind==='url'?'url':'text';
+  const err=q.kind==='email'?'Enter a valid email address':q.kind==='tel'?'Enter a phone number with at least 10 digits':'Required';
+  return `<div class="f" id="qq-${q.id}"><label class="l" for="q-${q.id}">${esc(q.label)}${q.required?' <em>*</em>':''}</label>
+    <input class="in" id="q-${q.id}" name="${q.id}" type="${type}" data-q="${q.id}" maxlength="300" placeholder="${esc(q.ph||'')}"${q.ac?` autocomplete="${q.ac}"`:''}${q.required?' required':''}><div class="err">${err}</div></div>`;
+}
+function block(q){
+  const hint=q.hint?` <span class="hint">· ${esc(q.hint)}</span>`:'';
+  if(q.t==='text') return `<div class="q">${textField(q)}</div>`;
+  if(q.t==='textarea') return `<div class="q" id="qq-${q.id}"><label class="l" for="q-${q.id}">${esc(q.label)}${hint}</label><textarea class="in" id="q-${q.id}" name="${q.id}" data-q="${q.id}" maxlength="2000" placeholder="${esc(q.ph||'')}"></textarea></div>`;
+  const multi=q.t==='multi'?` <span class="hint">· pick all that apply</span>`:'';
+  const eg=q.eg?`<div class="eg"><b>Example to price:</b> ${esc(q.eg)}</div>`:'';
+  const chips=q.opts.map((o,i)=>{o=norm(o);return `<button type="button" class="chip${o.sub?' two':''}" id="q-${q.id}-${i}" data-chip="${q.id}" data-i="${i}" aria-pressed="false"><span>${esc(o.v)}</span>${o.sub?`<small>${esc(o.sub)}</small>`:''}</button>`;}).join('');
+  const otherChip=q.other?`<button type="button" class="chip" id="q-${q.id}-other" data-chip="${q.id}" data-i="other" aria-pressed="false"><span>Other</span></button>`:'';
+  const otherIn=q.other?`<input class="in other" id="q-${q.id}-other-text" type="text" data-other="${q.id}" maxlength="80" aria-label="Other ${esc(q.label.toLowerCase())}" placeholder="Type your ${esc(q.label.toLowerCase())}" hidden>`:'';
+  return `<div class="q" id="qq-${q.id}"><div class="l" id="l-${q.id}">${esc(q.label)}${hint}${multi}</div>${eg}<div class="chips" role="group" aria-labelledby="l-${q.id}">${chips}${otherChip}</div>${otherIn}</div>`;
+}
+
+/* ───────── answers ───────── */
+function has(q){ const v=answers[q.id]; if(v==null) return false; if(Array.isArray(v)) return v.length>0; return String(v).trim().length>0; }
+function disp(id){
+  const q=BY[id], v=answers[id]; if(v==null||v==='') return '';
+  if(q.t==='multi') return v.join('; ');
+  if(q.t==='single'){ if(v==='Other') return (answers[id+'_other']||'').trim()||'Other'; const o=q.opts.map(norm).find(o=>o.v===v); return o&&o.sub?`${o.v} (~${o.sub})`:v; }
+  return String(v).trim();
+}
+function setChip(qid,i){
+  const q=BY[qid], opt=i==='other'?{v:'Other'}:norm(q.opts[i]);
+  if(q.t==='single'){ answers[qid]===opt.v?delete answers[qid]:answers[qid]=opt.v; if(answers[qid]!=='Other') delete answers[qid+'_other']; }
+  else{
+    let a=Array.isArray(answers[qid])?answers[qid].slice():[];
+    if(a.includes(opt.v)) a=a.filter(x=>x!==opt.v);
+    else if(opt.x) a=[opt.v];
+    else { a=a.filter(x=>{const o=q.opts.map(norm).find(o=>o.v===x);return !(o&&o.x);}); a.push(opt.v); }
+    a.length?answers[qid]=a:delete answers[qid];
+  }
+  sync(); saveDraft();
+  if(i==='other'&&answers[qid]==='Other'){ const el=$(`q-${qid}-other-text`); if(el){el.hidden=false;el.focus();} }
+}
+function sync(){
+  document.querySelectorAll('[data-chip]').forEach(b=>{
+    const q=BY[b.dataset.chip], v=b.dataset.i==='other'?'Other':norm(q.opts[b.dataset.i]).v, cur=answers[q.id];
+    b.setAttribute('aria-pressed',(q.t==='multi'?Array.isArray(cur)&&cur.includes(v):cur===v)?'true':'false');
+  });
+  document.querySelectorAll('[data-other]').forEach(el=>{ const id=el.dataset.other; el.hidden=answers[id]!=='Other'; const t=answers[id+'_other']||''; if(el.value!==t) el.value=t; });
+  document.querySelectorAll('[data-q]').forEach(el=>{ const t=answers[el.dataset.q]||''; if(el.value!==t) el.value=t; });
+  progress();
+}
+function progress(){
+  const qs=Q, done=qs.filter(has).length;
+  $('progressText').textContent=`${done} of ${qs.length} answered`;
+  $('progressBar').style.width=(100*done/qs.length)+'%';
+  SECTIONS.forEach(s=>{ const ss=Q.filter(q=>q.s===s.id); const el=document.querySelector(`[data-sec="${s.id}"]`); if(el) el.textContent=`${ss.filter(has).length}/${ss.length}`; });
+}
+
+/* draft on this device only, removed after submit */
+let dt=null;
+let submitted=false;
+function saveDraft(){ if(submitted) return; clearTimeout(dt); dt=setTimeout(()=>{ if(submitted) return; try{ localStorage.setItem(DRAFT_KEY,JSON.stringify({answers,started:STARTED})); }catch(e){} },300); }
+function clearDraft(){ submitted=true; clearTimeout(dt); try{ localStorage.removeItem(DRAFT_KEY); }catch(e){} }
+function loadDraft(){ try{ const d=JSON.parse(localStorage.getItem(DRAFT_KEY)||'null'); if(d&&d.answers&&typeof d.answers==='object') return d; }catch(e){} return null; }
+
+/* ───────── validation ───────── */
+function problems(){
+  const bad=[];
+  for(const q of Q){
+    if(!q.required) continue;
+    let ok=has(q);
+    if(ok&&q.kind==='email') ok=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(answers[q.id].trim());
+    if(ok&&q.kind==='tel') ok=(answers[q.id].replace(/\D/g,'').length>=10);
+    if(!ok) bad.push(q.id);
+  }
+  return bad;
+}
+function markInvalid(ids){
+  document.querySelectorAll('.invalid').forEach(el=>el.classList.remove('invalid'));
+  ids.forEach(id=>{ const el=$('qq-'+id); if(el) el.classList.add('invalid'); });
+}
+
+/* ───────── summary ───────── */
+function summary(){
+  const L=[`${(answers.name||'').trim()}${disp('city')?' — '+disp('city'):''}`];
+  for(const s of SECTIONS){
+    const bits=Q.filter(q=>q.s===s.id&&!['name','city'].includes(q.id)).map(q=>{const v=disp(q.id);return v?`${q.col}: ${v}`:'';}).filter(Boolean);
+    if(bits.length) L.push(`\n${s.title}\n`+bits.map(b=>'• '+b).join('\n'));
+  }
+  return L.join('\n');
+}
+
+/* ───────── submit ───────── */
+async function post(payload){
+  const body=JSON.stringify(payload);
+  try{
+    const r=await fetch(SCRIPT_URL,{method:'POST',body,redirect:'follow',cache:'no-store'});
+    return await r.json();
+  }catch(e){
+    // Response unreadable (some networks/browsers). Send once more without reading;
+    // the server ignores an identical repeat, so this never creates a duplicate row.
+    await fetch(SCRIPT_URL,{method:'POST',mode:'no-cors',body,cache:'no-store'});
+    return {ok:true,ref:null};
+  }
+}
+const ERR={
+  missing_required:'Please fill company name, contact person, a phone number and email.',
+  too_fast:'That was quick. Please review your answers and press Submit again.',
+  busy:'We are receiving a lot of responses right now. Please try again in a minute.',
+  invalid:'Something in the form could not be read. Please refresh the page and try again.',
+  server_error:'We could not save your profile. Please try again in a minute.',
+};
+async function submit(){
+  const msg=$('formMsg'); msg.hidden=true;
+  if(!CONNECTED){ console.warn('[Partner form] SCRIPT_URL is not set.'); msg.textContent=ERR.server_error; msg.hidden=false; return; }
+  const bad=problems(); markInvalid(bad);
+  if(bad.length){ const el=$('qq-'+bad[0]); el.scrollIntoView({behavior:'smooth',block:'center'}); const inp=el.querySelector('input,textarea'); if(inp) setTimeout(()=>inp.focus({preventScroll:true}),350); msg.textContent=`${bad.length} required field${bad.length>1?'s need':' needs'} attention.`; msg.hidden=false; return; }
+  const btn=$('submitBtn'); btn.disabled=true; btn.innerHTML='<span class="spin" aria-hidden="true"></span>Sending…';
+  const payload={
+    v:1, ref:REF, elapsed:Date.now()-STARTED, hp:$('hp_fax').value||'',
+    fields:Q.map(q=>({id:q.id,col:q.col,value:disp(q.id)})),
+  };
+  try{
+    const res=await post(payload);
+    if(res&&res.ok){ showDone(res.ref); return; }
+    msg.textContent=ERR[(res&&res.error)]||ERR.server_error; msg.hidden=false;
+  }catch(e){
+    msg.textContent='No connection. Check your internet and press Submit again — your answers are still here.'; msg.hidden=false;
+  }
+  btn.disabled=false; btn.textContent='Submit profile';
+}
+function showDone(ref){
+  $('doneSummary').textContent=summary();
+  $('doneTitle').textContent=`Thank you${answers.contact?', '+answers.contact.split(',')[0].trim():''}. Your profile is in.`;
+  $('doneText').textContent=`We'll reach out on ${(answers.phone||answers.email||'your contact details').trim()} when a client project matches your team.`;
+  if(ref){ $('doneRef').textContent='Reference '+ref; $('doneRef').hidden=false; }
+  $('formView').hidden=true; $('doneView').hidden=false;
+  document.querySelector('.progress').hidden=true;
+  clearDraft(); window.scrollTo({top:0});
+}
+
+/* ───────── misc ───────── */
+let tt=null;
+function toast(m){ const el=$('toast'); el.textContent=m; el.classList.add('show'); clearTimeout(tt); tt=setTimeout(()=>el.classList.remove('show'),2400); }
+async function copy(t){
+  try{ await navigator.clipboard.writeText(t); toast('Copied'); }
+  catch(e){ const r=document.createRange(); r.selectNodeContents($('doneSummary')); const s=getSelection(); s.removeAllRanges(); s.addRange(r); toast('Selected — press copy'); }
+}
+
+function wire(){
+  const form=$('form');
+  form.addEventListener('click',e=>{ const c=e.target.closest('[data-chip]'); if(c) setChip(c.dataset.chip,c.dataset.i); });
+  form.addEventListener('input',e=>{
+    const t=e.target;
+    if(t.dataset.q){ t.value.trim()?answers[t.dataset.q]=t.value:delete answers[t.dataset.q]; const w=$('qq-'+t.dataset.q); if(w) w.classList.remove('invalid'); }
+    else if(t.dataset.other){ const k=t.dataset.other+'_other'; t.value.trim()?answers[k]=t.value:delete answers[k]; }
+    else return;
+    progress(); saveDraft();
+  });
+  form.addEventListener('submit',e=>e.preventDefault());
+  $('jump').addEventListener('click',e=>{ const b=e.target.closest('[data-jump]'); if(b) $('sec-'+b.dataset.jump).scrollIntoView({behavior:'smooth',block:'start'}); });
+  $('submitBtn').addEventListener('click',submit);
+  $('copyBtn').addEventListener('click',()=>copy($('doneSummary').textContent));
+}
+
+function boot(){
+  render();
+  if(!CONNECTED) console.warn('[Partner form] SCRIPT_URL is not set — submissions will not be sent.');
+  wire();
+  const d=loadDraft(); if(d&&Object.keys(d.answers).length){ answers=d.answers; if(Number(d.started)>0&&Number(d.started)<STARTED) STARTED=Number(d.started); toast('Restored your unsaved answers'); }
+  sync();
+}
+boot();
+})();
+</script>
+</body>
+</html>
